@@ -4,11 +4,16 @@
 
 body {
     height: 100vh;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+    font-family: 'Pathway Extreme', sans-serif;
 }
 
 main {
+    background-color: aquamarine;
     display: grid;
+    justify-content: center;
+    justify-content: space-between;
+    grid-template-columns: 80vmin 80vmin;
+    grid-template-rows: 15vmin 20vmin 20vmin 20vmin 40vmin;
 }
 
 ul {
@@ -26,30 +31,54 @@ li {
 
 h1 {
     border: 2px solid red;
+    grid-column: 1 / span 2 ;
+    grid-row: 1 / span 1;
 }
 
 #board {
    border: 2px solid red;
-   height: 60vmin;
+   min-width: 60vmin;
+   grid-column: 1 / span 1;
+   grid-row: 2 / span 3; 
+   display: flex; 
+   flex-wrap: wrap; 
+   gap: 10px;
+   justify-content: center;
 }
 
-#button {
+.card {
+    border: 2px solid black;
+    height: 10vmin;
+    width: 22%;
+}
+
+button {
     background-color: white;
     border: 2px solid red;
+    font-family: 'Pathway Extreme', sans-serif;
     padding: 2vmin;
     text-align: center;
     text-decoration: none;
     font-size: 5vmin;
 }
 
+#button {
+    grid-column: 2 / span 1;
+    grid-row: 2/ span 3;
+}
+
 #timer {
     border: 2px solid red;
     height: 8vmin;
     font-size: 2.5vmin;
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 2;
 }
 
 #message {
     border: 2px solid red;
     height: 8vmin;
     font-size: 2.5vmin;
+    grid-column: 2 / span 1;
+    grid-row: 4 / span 1;
 }
