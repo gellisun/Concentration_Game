@@ -1,8 +1,11 @@
 // Constants
 // An array of colors or images
 // A constant for randomly selecting colors or images
-const COLORS = ['black', 'blue', 'fuchsia', 'lime', 'olive', 'purple', 'red', 'teal', 'yellow', 'green'];
-
+const COLORS = ['aliceblue', 'antiquewhite', 'cadetblue', 'coral', 'cornflowerblue', 'cornsilk', 'darkcyan', 'darksalmon', 'darkseagreen', 'darkslategray'];
+// 'honeydew', 'indianred', 'khaki', 'lavender', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray',
+// ''lightgreen', 'lightpink', 'lightseagreen', 'lightskyblue', 'lightsteelblue', 'mediumorchid', 'mediumpurple', 'navajowhite', 'navy', 'olive',
+// 'olivedrab', 'orange', 'orangered', 'palegreen', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'salmon',
+// 'seagreen', 'sienna', 'silver', 'steelblue', 'tan', 'teal', 'tomato', 'violet', 'yellow', 'yellowgreen', 'red', 'black'];
 
 // State of the game
 let totalCards;
@@ -31,15 +34,11 @@ btnEl.addEventListener('click', handleBtnClick);
 // Append them to the containing element in a random position —-> will leave as an alternative to create a container with 20 divs in the html
 
 function init() {
-    // Board with array of cards without values
-    // Set if the game has started with flipping action or start button
-    // Number of cards flipped (only two can be flipped at a time) to 0
-    // Timer or Moves to 0
     totalCards = 20;
     gameHasStarted = false;
     cardsFlipped = 0;
     timer = 0;
-    timeLeft = 2*60;
+    timeLeft = 5; // timeLeft = 2*60;
     winner = null;
     createBoard(boardEl);
     render();
@@ -53,56 +52,61 @@ function createBoard(boardEl) {
     }
 }
 
-function gameOver(){
-    cancelInterval(timer);
-    btnEl.hidden = false;
-}
-
 function updateTimer() {
     timeLeft = timeLeft -1;
     if (timeLeft >=0) {
         timerEl.innerHTML = timeLeft;
     }
     else {
-        gameOver();
+        gameHasStarted = false;
+        btnEl.hidden = false;
     }
 }
 
-function renderTimer() {
-    console.log('renderTimer')
+function startTimer() {
     timer = setInterval(updateTimer, 1000);
     updateTimer();
     btnEl.hidden = true;
 }
 
 function render() {
-
+    console.log(gameHasStarted)
+    // if (gameHasStarted === true) {
+    //     boardEl.style.pointerEvents = 'auto';
+    // }else {
+    //     boardEl.style.pointerEvents = 'none';
+    // }
 }
 
 // Player interacts…
-
 function handleBtnClick () {
-    renderTimer();
+    gameHasStarted = true;
+    startTimer();
 }
-// Click function:
+
 function handleMove(e) {
-    const cardsFlipped = boardEl.querySelectorAll('.card.active').length;
-    //guard
+    //guards
     if (! e.target.classList.contains('card')) {
-        console.log('not a card')
         return;
     };
-    // Player can click up to two cards
-    // Add class of active to the first card clicked
-    // Add class of active to the second card
-    // Stop ability of the player to click on any other card
+
+    if (! gameHasStarted) {
+        return;
+    }
+
+    cardsFlipped = boardEl.querySelectorAll('.card.active').length;
     if (cardsFlipped < 2) {
         e.target.classList.add('active');
+        const randomIdx = Math.floor(Math.random()*COLORS.length); 
+        const randomColor = COLORS[randomIdx];
+        e.target.style.backgroundColor = randomColor;
+        const target = e.target;
+        setTimeout(() => {
+            target.style.backgroundColor = 'transparent';
+        }, 2000);
     }
-    // Stop ability of the player to click on any other card
     if (cardsFlipped === 2) return;
     // If the cards have different values
-
     // show the color or image of the clicked cards for two seconds and then hide them
     // Remove the active class
     // Allow the ability of the player to click on the same cards again, and the other cards in the board

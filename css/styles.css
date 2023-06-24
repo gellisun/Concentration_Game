@@ -5,10 +5,10 @@
 body {
     height: 100vh;
     font-family: 'Pathway Extreme', sans-serif;
+    background-color: rgb(232, 250, 245);
 }
 
 main {
-    background-color: aquamarine;
     display: grid;
     justify-content: center;
     justify-content: space-between;
@@ -21,7 +21,6 @@ ul {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    border: 2px solid red;
     height: 6vmin;
 }
 
@@ -30,13 +29,13 @@ li {
 }
 
 h1 {
-    border: 2px solid red;
-    grid-column: 1 / span 2 ;
+    font-size: 6vmin;
+    text-align: center;
+    grid-column: 1 / span 2;
     grid-row: 1 / span 1;
 }
 
 #board {
-   border: 2px solid red;
    min-width: 60vmin;
    grid-column: 1 / span 1;
    grid-row: 2 / span 3; 
@@ -48,17 +47,18 @@ h1 {
 
 .card {
     border: 2px solid black;
+    border-radius: 1vmin;
     height: 15vmin;
     width: 16%;
 }
 
 .card.active {
-    border-color: red;
+    border: 2px solid red;
 }
 
 button {
-    background-color: white;
-    border: 2px solid red;
+    background-color: rgb(19, 85, 66);
+    color: rgb(232, 250, 245);
     font-family: 'Pathway Extreme', sans-serif;
     padding: 2vmin;
     text-align: center;
@@ -72,7 +72,6 @@ button {
 }
 
 #timer {
-    border: 2px solid red;
     height: 8vmin;
     font-size: 2.5vmin;
     grid-column: 2 / span 1;
@@ -80,7 +79,6 @@ button {
 }
 
 #message {
-    border: 2px solid red;
     height: 8vmin;
     font-size: 2.5vmin;
     grid-column: 2 / span 1;
