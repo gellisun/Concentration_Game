@@ -48,8 +48,12 @@ h1 {
 
 .card {
     border: 2px solid black;
-    height: 10vmin;
-    width: 22%;
+    height: 15vmin;
+    width: 16%;
+}
+
+.card.active {
+    border-color: red;
 }
 
 button {
