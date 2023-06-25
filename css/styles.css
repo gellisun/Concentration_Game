@@ -5,7 +5,7 @@
 body {
     height: 100vh;
     font-family: 'Pathway Extreme', sans-serif;
-    background-color: rgb(232, 250, 245);
+    background-color: rgb(19, 85, 66);
 }
 
 main {
@@ -17,6 +17,7 @@ main {
 }
 
 ul {
+    color: rgb(232, 250, 245);
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -30,6 +31,7 @@ li {
 
 h1 {
     font-size: 6vmin;
+    color: rgb(232, 250, 245);
     text-align: center;
     grid-column: 1 / span 2;
     grid-row: 1 / span 1;
@@ -57,8 +59,10 @@ h1 {
 }
 
 button {
-    background-color: rgb(19, 85, 66);
-    color: rgb(232, 250, 245);
+    background-color: rgb(232, 250, 245);
+    color: rgb(19, 85, 66);
+    border: none;
+    border-radius: 5vmin;
     font-family: 'Pathway Extreme', sans-serif;
     padding: 2vmin;
     text-align: center;
@@ -74,6 +78,7 @@ button {
 #timer {
     height: 8vmin;
     font-size: 2.5vmin;
+    color: rgb(232, 250, 245);
     grid-column: 2 / span 1;
     grid-row: 3 / span 2;
 }
@@ -81,6 +86,7 @@ button {
 #message {
     height: 8vmin;
     font-size: 2.5vmin;
+    color: rgb(232, 250, 245);
     grid-column: 2 / span 1;
     grid-row: 4 / span 1;
 }

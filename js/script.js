@@ -1,11 +1,11 @@
 // Constants
-// An array of colors or images
-// A constant for randomly selecting colors or images
 const COLORS = ['aliceblue', 'antiquewhite', 'cadetblue', 'coral', 'cornflowerblue', 'cornsilk', 'darkcyan', 'darksalmon', 'darkseagreen', 'darkslategray'];
 // 'honeydew', 'indianred', 'khaki', 'lavender', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray',
 // ''lightgreen', 'lightpink', 'lightseagreen', 'lightskyblue', 'lightsteelblue', 'mediumorchid', 'mediumpurple', 'navajowhite', 'navy', 'olive',
 // 'olivedrab', 'orange', 'orangered', 'palegreen', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'salmon',
 // 'seagreen', 'sienna', 'silver', 'steelblue', 'tan', 'teal', 'tomato', 'violet', 'yellow', 'yellowgreen', 'red', 'black'];
+const RANDOM_COLORS = COLORS.sort(() => 0.5 - Math.random());
+
 
 // State of the game
 let totalCards;
@@ -18,6 +18,7 @@ let winner;
 
 // Cached elements
 const boardEl = document.getElementById('board');
+const cardEl = document.querySelectorAll('card');
 const btnEl = document.getElementById('button');
 const timerEl = document.getElementById('clock');
 const msgEl = document.getElementById('message');
@@ -32,7 +33,6 @@ btnEl.addEventListener('click', handleBtnClick);
 // Functions:
 // Generate the cards and display them in default five rows, three columns.
 // Append them to the containing element in a random position —-> will leave as an alternative to create a container with 20 divs in the html
-
 function init() {
     totalCards = 20;
     gameHasStarted = false;
@@ -70,13 +70,9 @@ function startTimer() {
 }
 
 function render() {
-    console.log(gameHasStarted)
-    // if (gameHasStarted === true) {
-    //     boardEl.style.pointerEvents = 'auto';
-    // }else {
-    //     boardEl.style.pointerEvents = 'none';
-    // }
+    
 }
+
 
 // Player interacts…
 function handleBtnClick () {
@@ -93,17 +89,18 @@ function handleMove(e) {
     if (! gameHasStarted) {
         return;
     }
-
+    //game has started
     cardsFlipped = boardEl.querySelectorAll('.card.active').length;
     if (cardsFlipped < 2) {
-        e.target.classList.add('active');
         const randomIdx = Math.floor(Math.random()*COLORS.length); 
-        const randomColor = COLORS[randomIdx];
-        e.target.style.backgroundColor = randomColor;
-        const target = e.target;
-        setTimeout(() => {
-            target.style.backgroundColor = 'transparent';
-        }, 2000);
+        const pickedColor = RANDOM_COLORS[randomIdx];
+        e.target.style.backgroundColor = pickedColor;
+        e.target.classList.add(pickedColor);
+        
+        // const target = e.target;
+        // setTimeout(() => {
+        //     target.style.backgroundColor = 'transparent';
+        // }, 2000);
     }
     if (cardsFlipped === 2) return;
     // If the cards have different values
@@ -114,9 +111,16 @@ function handleMove(e) {
     render();
 }
 
+
 // Check the game status:
 // While the timer is not 0/or the turns are not maxed out and the are not 10 pairs of cards with active class, keep letting the player click on boxes
 // Else, well done, the game is finished!
+function checkStatus() {
+    while (timer !== 0 && cardEl.className !== 'active') {
+        gameHasStarted = true;
+        winner =  null;
+    }
+}
 
 
 // Restart
