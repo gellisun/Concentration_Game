@@ -1,16 +1,25 @@
 // Constants
-const COLORS = ['aliceblue', 'antiquewhite', 'cadetblue', 'coral', 'cornflowerblue', 'cornsilk', 'darkcyan', 'darksalmon', 'darkseagreen', 'darkslategray'];
-// 'honeydew', 'indianred', 'khaki', 'lavender', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray',
-// ''lightgreen', 'lightpink', 'lightseagreen', 'lightskyblue', 'lightsteelblue', 'mediumorchid', 'mediumpurple', 'navajowhite', 'navy', 'olive',
-// 'olivedrab', 'orange', 'orangered', 'palegreen', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'salmon',
-// 'seagreen', 'sienna', 'silver', 'steelblue', 'tan', 'teal', 'tomato', 'violet', 'yellow', 'yellowgreen', 'red', 'black'];
-const RANDOM_COLORS = COLORS.sort(() => 0.5 - Math.random());
+// const COLORS = ['aliceblue', 'antiquewhite', 'cadetblue', 'coral', 'cornflowerblue', 'cornsilk', 'darkcyan', 'darksalmon', 'darkseagreen', 'darkslategray'];
+// const RANDOM_COLORS = COLORS.sort(() => 0.5 - Math.random());
+const COLORS = [
+    {id: 1, color: 'aliceblue'},
+    {id: 2, color: 'antiquewhite'},
+    {id: 3, color: 'cadetblue'},
+    {id: 4, color: 'coral'},
+    {id: 5, color: 'cornflowerblue'},
+    {id: 6, color: 'cornsilk'},
+    {id: 7, color: 'darkcyan'},
+    {id: 8, color: 'darksalmon'},
+    {id: 9, color: 'darkseagreen'},
+    {id: 10, color: 'darkslategray'}
+]
 
 
 // State of the game
 let totalCards;
 let gameHasStarted;
 let cardsFlipped;
+let pickedColor;
 let timer;
 let timeLeft;
 let winner;
@@ -37,8 +46,9 @@ function init() {
     totalCards = 20;
     gameHasStarted = false;
     cardsFlipped = 0;
+    pickedColor = [];
     timer = 0;
-    timeLeft = 5; // timeLeft = 2*60;
+    timeLeft = 10; // timeLeft = 2*60;
     winner = null;
     createBoard(boardEl);
     render();
@@ -85,24 +95,32 @@ function handleMove(e) {
     if (! e.target.classList.contains('card')) {
         return;
     };
-
     if (! gameHasStarted) {
         return;
     }
     //game has started
-    cardsFlipped = boardEl.querySelectorAll('.card.active').length;
-    if (cardsFlipped < 2) {
-        const randomIdx = Math.floor(Math.random()*COLORS.length); 
-        const pickedColor = RANDOM_COLORS[randomIdx];
-        e.target.style.backgroundColor = pickedColor;
-        e.target.classList.add(pickedColor);
+    // e.target.classList.add('active');
+    // cardsFlipped = boardEl.querySelectorAll('.card.active').length;
+    // if (cardsFlipped === 2) return;
+    // if (cardsFlipped < 2) {
+        // const randomIdx = Math.floor(Math.random()*COLORS.length); 
+        // const pickedColor = RANDOM_COLORS[randomIdx];
+    const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)].color;
+    if (pickedColor.length === 2) return;
+    if (pickedColor.length < 2) {
+        pickedColor.push(randomColor);
+        e.target.style.backgroundColor = randomColor;
+        const target = e.target;
+    if (pickedColor.at(0) !== pickedColor.at(1)) {
+        setTimeout(() => {
+            target.style.backgroundColor = 'hidden';
+        }, 2000);
         
-        // const target = e.target;
-        // setTimeout(() => {
-        //     target.style.backgroundColor = 'transparent';
-        // }, 2000);
     }
-    if (cardsFlipped === 2) return;
+    if (pickedColor.at(0) === pickedColor.at(1)) {
+        target.style.backgroundColor = 'visible';
+    }
+    }
     // If the cards have different values
     // show the color or image of the clicked cards for two seconds and then hide them
     // Remove the active class
@@ -125,3 +143,12 @@ function checkStatus() {
 
 // Restart
 // By clicking on play button the board of cards resets, the timer resets
+
+
+
+
+//if I decide to put down 52 cards...
+// 'honeydew', 'indianred', 'khaki', 'lavender', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray',
+// ''lightgreen', 'lightpink', 'lightseagreen', 'lightskyblue', 'lightsteelblue', 'mediumorchid', 'mediumpurple', 'navajowhite', 'navy', 'olive',
+// 'olivedrab', 'orange', 'orangered', 'palegreen', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'salmon',
+// 'seagreen', 'sienna', 'silver', 'steelblue', 'tan', 'teal', 'tomato', 'violet', 'yellow', 'yellowgreen', 'red', 'black'];
