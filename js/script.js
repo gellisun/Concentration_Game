@@ -5,6 +5,7 @@ const hiddenColors = COLORS.sort(() => 0.5 - Math.random());
 // State of the game
 let gameHasStarted;
 let cardsFlipped;
+let firstAndSecondChoice;
 let timer;
 // let timeLeft;
 let winner;
@@ -27,6 +28,7 @@ btnEl.addEventListener('click', handleBtnClick);
 function init() {
     gameHasStarted = false;
     cardsFlipped = 0;
+    firstAndSecondChoice = [];
     timer = 0;
     // timeLeft = 10; // timeLeft = 2*60;
     winner = null;
@@ -111,15 +113,35 @@ function handleMove(e) {
     target.classList.add('active');
     let colorIndex = target.id;
     cardsFlipped = boardEl.querySelectorAll('.card.active').length;
-    if (cardsFlipped < 3) {
+    if (firstAndSecondChoice.length < 2) {
         target.style.backgroundColor = hiddenColors[colorIndex];
-     }
-     //hide the div after two cards colors are the same: target.style.visibility = 'hidden';
-        //     setTimeout(() => {
-        //         target.style.backgroundColor = 'hidden';
-        //     }, 2000);
-        render();
+        firstAndSecondChoice.push(target);
     }
+    console.log(firstAndSecondChoice[0].style.backgroundColor)
+    if (firstAndSecondChoice.length >= 2 && firstAndSecondChoice[0].style.backgroundColor !== firstAndSecondChoice[1].style.backgroundColor) {
+        setTimeout(() => {
+            firstAndSecondChoice.forEach((div) => {
+                div.style.backgroundColor = 'black';
+                div.classList.remove('active');
+            });
+            firstAndSecondChoice = []; console.log('hi')
+        }, 2000);
+    }
+    if (firstAndSecondChoice.length >=2 && firstAndSecondChoice[0].style.backgroundColor === firstAndSecondChoice[1].style.backgroundColor) {
+        setTimeout(() => {
+            firstAndSecondChoice.forEach((div) => {
+                div.classList.remove('active');
+                div.style.visibility = 'hidden';
+            });
+            firstAndSecondChoice = [];
+        }, 2000);
+    }
+    //target.style.display = 'none';
+    //     setTimeout(() => {
+    //         target.style.backgroundColor = 'hidden';
+    //     }, 2000);
+    render();
+}
 
 // Check the game status:
 // While the timer is not 0/or the turns are not maxed out and the are not 10 pairs of cards with active class, keep letting the player click on boxes
