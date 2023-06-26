@@ -56,10 +56,6 @@ h1 {
     width: 16%;
 }
 
-.card.active {
-    border: 2px solid red;
-}
-
 button {
     background-color: rgb(232, 250, 245);
     color: rgb(19, 85, 66);
