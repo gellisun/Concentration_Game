@@ -4,17 +4,14 @@ const hiddenColors = COLORS.sort(() => 0.5 - Math.random());
 
 // State of the game
 let gameHasStarted;
-let cardsFlipped;
 let firstAndSecondChoice;
 let timer;
-// let timeLeft;
-let winner;
-
+let winningCondition;
+let timeRunOut;
 
 // Cached elements
 const boardEl = document.getElementById('board');
 const btnEl = document.getElementById('button');
-const timerEl = document.getElementById('clock');
 const msgEl = document.getElementById('message');
 
 
@@ -27,11 +24,9 @@ btnEl.addEventListener('click', handleBtnClick);
 // Functions:
 function init() {
     gameHasStarted = false;
-    cardsFlipped = 0;
     firstAndSecondChoice = [];
-    timer = 0;
-    // timeLeft = 10; // timeLeft = 2*60;
-    winner = null;
+    winningCondition = hiddenColors.length;
+    timeRunOut = false;
     createBoard(boardEl);
     render();
 }
@@ -46,22 +41,8 @@ function createBoard(boardEl) {
     }
 }
 
-// function updateTimer() {
-//     timeLeft = timeLeft -1;
-//     if (timeLeft >=0) {
-//         timerEl.innerHTML = timeLeft;
-//     }
-//     else {
-//         gameHasStarted = false;
-//         btnEl.hidden = false;
-//     }
-// }
-
 function startTimer() {
-    // timer = setInterval(updateTimer, 1000);
-    // updateTimer();
     countdown(2, 0o0);
-    btnEl.hidden = true;
 }
 
 function countdown(minutes, seconds) {
@@ -77,19 +58,19 @@ function countdown(minutes, seconds) {
                 setTimeout(function () {
                     countdown(minutes - 1, 59);
                 }, 1000);
+            } else {
+                timeRunOut = true;
+                msgEl.innerText = 'TRY AGAIN!'
+                boardEl.removeEventListener('click', handleMove);
             }
         }
     }
     tick();
 }
 
-
-// countdown(2, 00);
-
 function render() {
 
 }
-
 
 // Player interacts…
 function handleBtnClick(e) {
@@ -110,43 +91,38 @@ function handleMove(e) {
     };
     //game has started
     let target = e.target;
-    target.classList.add('active');
     let colorIndex = target.id;
-    cardsFlipped = boardEl.querySelectorAll('.card.active').length;
     if (firstAndSecondChoice.length < 2) {
         target.style.backgroundColor = hiddenColors[colorIndex];
         firstAndSecondChoice.push(target);
     }
-    console.log(firstAndSecondChoice[0].style.backgroundColor)
     if (firstAndSecondChoice.length >= 2 && firstAndSecondChoice[0].style.backgroundColor !== firstAndSecondChoice[1].style.backgroundColor) {
         setTimeout(() => {
             firstAndSecondChoice.forEach((div) => {
                 div.style.backgroundColor = 'black';
-                div.classList.remove('active');
             });
-            firstAndSecondChoice = []; console.log('hi')
+            firstAndSecondChoice = []; 
         }, 2000);
     }
     if (firstAndSecondChoice.length >=2 && firstAndSecondChoice[0].style.backgroundColor === firstAndSecondChoice[1].style.backgroundColor) {
         setTimeout(() => {
             firstAndSecondChoice.forEach((div) => {
-                div.classList.remove('active');
                 div.style.visibility = 'hidden';
             });
             firstAndSecondChoice = [];
+            winningCondition -= 2;
+            checkForWin();
         }, 2000);
     }
-    //target.style.display = 'none';
-    //     setTimeout(() => {
-    //         target.style.backgroundColor = 'hidden';
-    //     }, 2000);
     render();
 }
 
 // Check the game status:
-// While the timer is not 0/or the turns are not maxed out and the are not 10 pairs of cards with active class, keep letting the player click on boxes
-// Else, well done, the game is finished
-
+function checkForWin() {
+    if (winningCondition === 0 && !timeRunOut) {
+        msgEl.innerText = 'CONGRATULATIONS!!! You spotted all matching pairs!';
+    }
+}
 
 // Restart
 // By clicking on play button the board of cards resets, the timer resets
