@@ -9,6 +9,8 @@ body {
 }
 
 main {
+    height: 100vmin;
+    width: 180vmin;
     display: grid;
     justify-content: center;
     justify-content: space-between;
