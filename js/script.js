@@ -52,9 +52,8 @@ const CARDS = [
     { path: '../imgs/cards/spades/spades-r04.svg', id: '4' },
     { path: '../imgs/cards/spades/spades-r03.svg', id: '3' },
     { path: '../imgs/cards/spades/spades-r02.svg', id: '2' }];
-const CARD_BACK = '../imgs/cards/backs/red.svg';
+const CARD_BACK = ['../imgs/cards/backs/red.svg', '../imgs/cards/backs/blue.svg'];
 const SHUFFLED_CARDS = CARDS.sort(() => 0.5 - Math.random());
-
 
 // State of the game
 let gameHasStarted;
@@ -88,7 +87,7 @@ function init() {
 function createBoard(boardEl) {
     for (let i = 0; i < SHUFFLED_CARDS.length; i++) {
         const card = document.createElement('img');
-        card.src = CARD_BACK;
+        card.src = CARD_BACK[Math.floor(Math.random() * CARD_BACK.length)];
         card.className = 'card';
         card.id = i;
         boardEl.appendChild(card);
@@ -152,13 +151,18 @@ function handleMove(e) {
     let selectedCardId = SHUFFLED_CARDS[cardIndex].id;
 
     if (firstAndSecondChoice.length < 2) {
+        if(target.classList.contains('active')) {
+            return;
+        }
         target.src = selectedCard;
+        target.classList.add('active');
         firstAndSecondChoice.push({card: target, id: selectedCardId});
     }
     if (firstAndSecondChoice.length === 2 && firstAndSecondChoice[0].id !== firstAndSecondChoice[1].id) {
         setTimeout(() => {
             for (let choice of firstAndSecondChoice) {
                 choice.card.src = CARD_BACK;
+                choice.card.classList.remove('active');
             }
             firstAndSecondChoice = [];
         }, 1000);
@@ -167,6 +171,7 @@ function handleMove(e) {
         setTimeout(() => {
             for (let choice of firstAndSecondChoice) {
                 choice.card.style.visibility = 'hidden';
+                choice.card.classList.remove('active');
             }
             firstAndSecondChoice = [];
             winningCondition -= 2;
@@ -178,40 +183,8 @@ function handleMove(e) {
 
 // Check the game status:
 function checkForWin() {
+console.log(winningCondition);
     if (winningCondition === 0 && !timeRunOut) {
         msgEl.innerText = 'CONGRATULATIONS!!! You spotted all matching pairs!';
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//if I decide to put down 52 cards...
-// 'honeydew', 'indianred', 'khaki', 'lavender', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray',
-// ''lightgreen', 'lightpink', 'lightseagreen', 'lightskyblue', 'lightsteelblue', 'mediumorchid', 'mediumpurple', 'navajowhite', 'navy', 'olive',
-// 'olivedrab', 'orange', 'orangered', 'palegreen', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'salmon',
-// 'seagreen', 'sienna', 'silver', 'steelblue', 'tan', 'teal', 'tomato', 'violet', 'yellow', 'yellowgreen', 'red', 'black']
