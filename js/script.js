@@ -1,6 +1,60 @@
-// Constants
-const COLORS = ['aliceblue', 'aliceblue', 'antiquewhite', 'antiquewhite', 'cadetblue', 'cadetblue', 'coral', 'coral', 'cornflowerblue', 'cornflowerblue', 'cornsilk', 'cornsilk', 'darkcyan', 'darkcyan', 'darksalmon', 'darksalmon', 'darkseagreen', 'darkseagreen', 'darkslategray', 'darkslategray'];
-const hiddenColors = COLORS.sort(() => 0.5 - Math.random());
+// // Constants
+const CARDS = [
+    {path: '../imgs/cards/clubs/clubs-A.svg', id: 'A'}, 
+    {path: '../imgs/cards/clubs/clubs-K.svg', id: 'K'},
+    {path: '../imgs/cards/clubs/clubs-Q.svg', id: 'Q'},
+    {path: '../imgs/cards/clubs/clubs-J.svg', id: 'J'},
+    {path: '../imgs/cards/clubs/clubs-r10.svg', id: '10'},
+    {path: '../imgs/cards/clubs/clubs-r09.svg', id: '9'},
+    {path: '../imgs/cards/clubs/clubs-r08.svg', id: '8'},
+    {path: '../imgs/cards/clubs/clubs-r07.svg', id: '7'},
+    {path: '../imgs/cards/clubs/clubs-r06.svg', id: '6'},
+    {path: '../imgs/cards/clubs/clubs-r05.svg', id: '5'},
+    {path: '../imgs/cards/clubs/clubs-r04.svg', id: '4'},
+    {path: '../imgs/cards/clubs/clubs-r03.svg', id: '3'},
+    {path: '../imgs/cards/clubs/clubs-r02.svg', id: '2'},
+    {path: '../imgs/cards/diamonds/diamonds-A.svg', id: 'A'},
+    {path: '../imgs/cards/diamonds/diamonds-K.svg', id: 'K'},
+    {path: '../imgs/cards/diamonds/diamonds-Q.svg', id: 'Q'},
+    {path: '../imgs/cards/diamonds/diamonds-J.svg', id: 'J'},
+    {path: '../imgs/cards/diamonds/diamonds-r10.svg', id: '10'},
+    {path: '../imgs/cards/diamonds/diamonds-r09.svg', id: '9'},
+    {path: '../imgs/cards/diamonds/diamonds-r08.svg', id: '8'},
+    {path: '../imgs/cards/diamonds/diamonds-r07.svg', id: '7'},
+    {path: '../imgs/cards/diamonds/diamonds-r06.svg', id: '6'},
+    {path: '../imgs/cards/diamonds/diamonds-r05.svg', id: '5'},
+    {path: '../imgs/cards/diamonds/diamonds-r04.svg', id: '4'},
+    {path: '../imgs/cards/diamonds/diamonds-r03.svg', id: '3'},
+    {path: '../imgs/cards/diamonds/diamonds-r02.svg', id: '2'},
+    {path: '../imgs/cards/hearts/hearts-A.svg', id: 'A'},
+    {path: '../imgs/cards/hearts/hearts-K.svg', id: 'K'},
+    {path:'../imgs/cards/hearts/hearts-Q.svg', id: 'Q'},
+    {path: '../imgs/cards/hearts/hearts-J.svg', id: 'J'},
+    {path: '../imgs/cards/hearts/hearts-r10.svg', id: '10'},
+    {path: '../imgs/cards/hearts/hearts-r09.svg', id: '9'},
+    {path: '../imgs/cards/hearts/hearts-r08.svg', id: '8'},
+    {path: '../imgs/cards/hearts/hearts-r07.svg', id: '7'},
+    {path: '../imgs/cards/hearts/hearts-r06.svg', id: '6'},
+    {path: '../imgs/cards/hearts/hearts-r05.svg', id: '5'},
+    {path: '../imgs/cards/hearts/hearts-r04.svg', id: '4'},
+    {path: '../imgs/cards/hearts/hearts-r03.svg', id: '3'},
+    {path: '../imgs/cards/hearts/hearts-r02.svg', id: '2'},
+    {path: '../imgs/cards/spades/spades-A.svg', id: 'A'},
+    {path: '../imgs/cards/spades/spades-K.svg', id: 'K'},
+    {path: '../imgs/cards/spades/spades-Q.svg', id: 'Q'},
+    {path: '../imgs/cards/spades/spades-J.svg', id: 'J'},
+    {path: '../imgs/cards/spades/spades-r10.svg', id: '10'},
+    {path: '../imgs/cards/spades/spades-r09.svg', id: '9'},
+    {path: '../imgs/cards/spades/spades-r08.svg', id: '8'},
+    {path: '../imgs/cards/spades/spades-r07.svg', id: '7'},
+    {path: '../imgs/cards/spades/spades-r06.svg', id: '6'},
+    {path: '../imgs/cards/spades/spades-r05.svg', id: '5'},
+    {path: '../imgs/cards/spades/spades-r04.svg', id: '4'},
+    {path: '../imgs/cards/spades/spades-r03.svg', id: '3'},
+    {path: '../imgs/cards/spades/spades-r02.svg', id: '2'}];
+const CARD_BACK = '../imgs/cards/backs/red.svg';
+const SHUFFLED_CARDS = CARDS.sort(() => 0.5 - Math.random());
+
 
 // State of the game
 let gameHasStarted;
@@ -25,18 +79,18 @@ btnEl.addEventListener('click', handleBtnClick);
 function init() {
     gameHasStarted = false;
     firstAndSecondChoice = [];
-    winningCondition = hiddenColors.length;
+    winningCondition = SHUFFLED_CARDS.length;
     timeRunOut = false;
     createBoard(boardEl);
     render();
 }
 
 function createBoard(boardEl) {
-    for (let i = 0; i < hiddenColors.length; i++) {
-        const card = document.createElement('div');
+    for (let i = 0; i < SHUFFLED_CARDS.length; i++) {
+        const card = document.createElement('img');
+        card.src = CARD_BACK;
         card.className = 'card';
         card.id = i;
-        card.style.backgroundColor = 'black';
         boardEl.appendChild(card);
     }
 }
@@ -92,29 +146,32 @@ function handleMove(e) {
     };
     //game has started
     let target = e.target;
-    let colorIndex = target.id;
+    let cardIndex = target.id;
+    let selectedCard = document.getElementsByClassName('card'); 
+    selectedCard = SHUFFLED_CARDS[cardIndex].path;
+    let selectedCardId = SHUFFLED_CARDS[cardIndex].id;
+    
     if (firstAndSecondChoice.length < 2) {
-        target.style.backgroundColor = hiddenColors[colorIndex];
-        firstAndSecondChoice.push(target);
+        target.src = selectedCard;
+        firstAndSecondChoice.push(selectedCardId); 
     }
-    if (firstAndSecondChoice.length >= 2 && firstAndSecondChoice[0].style.backgroundColor !== firstAndSecondChoice[1].style.backgroundColor) {
+    if (firstAndSecondChoice.length === 2 && firstAndSecondChoice[0] !== firstAndSecondChoice[1] ) { 
         setTimeout(() => {
-            firstAndSecondChoice.forEach((div) => {
-                div.style.backgroundColor = 'black';
-            });
+            const card = document.getElementsByClassName('card'); 
+            card.src = CARD_BACK;
             firstAndSecondChoice = []; 
         }, 2000);
     }
-    if (firstAndSecondChoice.length >=2 && firstAndSecondChoice[0].style.backgroundColor === firstAndSecondChoice[1].style.backgroundColor) {
-        setTimeout(() => {
-            firstAndSecondChoice.forEach((div) => {
-                div.style.visibility = 'hidden';
-            });
-            firstAndSecondChoice = [];
-            winningCondition -= 2;
-            checkForWin();
-        }, 2000);
-    }
+    // if (firstAndSecondChoice.length >=2 && firstAndSecondChoice[0] === firstAndSecondChoice[1]) {
+    //     setTimeout(() => {
+    //         firstAndSecondChoice.forEach((img) => {
+    //             img.style.display = 'none';
+    //         });
+    //         firstAndSecondChoice = [];
+    //         winningCondition -= 2;
+    //         checkForWin();
+    //     }, 2000);
+    // }
     render();
 }
 

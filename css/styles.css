@@ -9,8 +9,8 @@ body {
 }
 
 main {
-    height: 80vmin;
-    width: 169vmin;
+    height: 100 vmin;
+    width: 200vmin;
     display: grid;
     justify-content: center;
     justify-content: space-between;
@@ -18,19 +18,20 @@ main {
     grid-template-rows: 15vmin 20vmin 20vmin 20vmin 40vmin;
 }
 
-ul {
+/* ul {
     color: rgb(232, 250, 245);
     list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: start;
-    height: 6vmin;
+    height: 5vmin;
 }
 
 li {
     margin-right: 2vmin;
     font-size: 2vmin;
 }
+*/
 
 a {
     color: rgb(232, 250, 245);
@@ -46,20 +47,18 @@ h1 {
 }
 
 #board {
-   min-width: 60vmin;
+   min-width: 100vmin;
    grid-column: 1 / span 1;
    grid-row: 2 / span 3; 
    display: flex; 
    flex-wrap: wrap; 
-   gap: 10px;
+   gap: px;
    justify-content: center;
 }
 
 .card {
-    border: 2px solid black;
-    border-radius: 1vmin;
-    height: 15vmin;
-    width: 16%;
+    width: 9vmin;
+    height: 13vmin;
 }
 
 button {
@@ -68,6 +67,7 @@ button {
     border: none;
     border-radius: 5vmin;
     font-family: 'Pathway Extreme', sans-serif;
+    margin-top: 8vmin;
     padding: 2vmin;
     text-align: center;
     text-decoration: none;
