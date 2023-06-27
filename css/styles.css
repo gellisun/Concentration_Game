@@ -72,6 +72,7 @@ button {
     text-align: center;
     text-decoration: none;
     font-size: 5vmin;
+    cursor: pointer;
 }
 
 #button {
