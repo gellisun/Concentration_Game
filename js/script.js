@@ -74,7 +74,8 @@ function render() {
 
 // Player interacts…
 function handleBtnClick(e) {
-    if (!e.target.classList.contains('play')) {
+    let target = e.target;
+    if (!target.classList.contains('play')) {
         return;
     }
     gameHasStarted = true;
@@ -123,9 +124,6 @@ function checkForWin() {
         msgEl.innerText = 'CONGRATULATIONS!!! You spotted all matching pairs!';
     }
 }
-
-// Restart
-// By clicking on play button the board of cards resets, the timer resets
 
 
 

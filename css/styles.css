@@ -9,8 +9,8 @@ body {
 }
 
 main {
-    height: 100vmin;
-    width: 180vmin;
+    height: 80vmin;
+    width: 169vmin;
     display: grid;
     justify-content: center;
     justify-content: space-between;
@@ -29,6 +29,12 @@ ul {
 
 li {
     margin-right: 2vmin;
+    font-size: 2vmin;
+}
+
+a {
+    color: rgb(232, 250, 245);
+    text-decoration: none;
 }
 
 h1 {
@@ -87,4 +93,11 @@ button {
     color: rgb(232, 250, 245);
     grid-column: 2 / span 1;
     grid-row: 4 / span 1;
+}
+
+#footer {
+    color: rgb(232, 250, 245);
+    padding: 3vmin;
+    display: flex;
+    justify-content: flex-end;
 }
