@@ -5,7 +5,8 @@
 body {
   height: 100vh;
   font-family: 'Pathway Extreme', sans-serif;
-  background-color: rgb(19, 85, 66);
+  background-image: url('/imgs/background/avengers-background.jpg');
+  background-size: cover;
 }
 
 main {
@@ -18,30 +19,11 @@ main {
   grid-template-rows: 15vmin 20vmin 20vmin 10vmin 5vmin;
 }
 
-/* ul {
-  color: rgb(232, 250, 245);
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  height: 5vmin;
-}
-
-li {
-  margin-right: 2vmin;
-  font-size: 2vmin;
-} */
-
-
-a {
-  color: rgb(232, 250, 245);
-  text-decoration: none;
-}
-
 h1 {
   font-size: 7vmin;
   color: rgb(232, 250, 245);
-  margin-left: 23vmin;
+  text-align: center;
+  margin-top: 3vmin;
 }
 
 #board {
@@ -54,8 +36,8 @@ h1 {
 }
 
 .card {
-  width: 9vmin;
-  height: 13vmin;
+  width: 10vmin;
+  height: 14vmin;
 }
 
 .dropdown {
@@ -65,7 +47,7 @@ h1 {
 
 label {
   color: rgb(232, 250, 245);
-  font-size: 1.9vmin;
+  font-size: 2vmin;
   padding-right: 1vmin;
 }
 
@@ -77,7 +59,7 @@ label {
 }
 
 .play {
-  background-color: rgb(232, 250, 245);
+  background-color: rgba(232, 250, 245, 0.6);
   color: rgb(19, 85, 66);
   border: none;
   border-radius: 5vmin;
@@ -104,7 +86,7 @@ label {
 }
 
 #reset {
-  background-color: rgb(232, 250, 245);
+  background-color: rgba(232, 250, 245, 0.7);
   color: rgb(19, 85, 66);
   border: none;
   border-radius: 1vmin;
@@ -126,7 +108,14 @@ label {
 
 #footer {
   color: rgb(232, 250, 245);
+  font-size: 2vmin;
   padding: 3vmin;
+  margin-right: 2vmin;
   display: flex;
   justify-content: flex-end;
+}
+
+a {
+  color: rgb(232, 250, 245);
+  text-decoration: none;
 }

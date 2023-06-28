@@ -20,7 +20,7 @@ In turn, each player chooses two cards and turns them face up. If they are of th
 The game ends when the last pair has been picked up. The winner is the person with the most pairs. There may be a tie for first place.
 
 
-![alt text](/imgs/README%20imgs/concentration_game.png)
+![alt text](/imgs/README%20imgs/marvel_themed.png)
 
 # Technologies Used
 
