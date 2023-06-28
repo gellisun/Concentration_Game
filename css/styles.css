@@ -14,11 +14,11 @@ main {
   display: grid;
   justify-content: center;
   justify-content: space-between;
-  grid-template-columns: 100vmin 100vmin;
-  grid-template-rows: 15vmin 10vmin 20vmin 20vmin 40vmin;
+  grid-template-columns: 10vmin 100vmin 100vmin 10vmin;
+  grid-template-rows: 15vmin 20vmin 20vmin 20vmin 40vmin;
 }
 
-ul {
+/* ul {
   color: rgb(232, 250, 245);
   list-style: none;
   display: flex;
@@ -30,7 +30,7 @@ ul {
 li {
   margin-right: 2vmin;
   font-size: 2vmin;
-}
+} */
 
 
 a {
@@ -42,14 +42,12 @@ h1 {
   font-size: 7vmin;
   color: rgb(232, 250, 245);
   text-align: center;
-  grid-column: 1 / span 2;
-  grid-row: 1 / span 1;
 }
 
 #board {
   min-width: 100vmin;
-  grid-column: 1 / span 1;
-  grid-row: 2 / span 3;
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 3;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -61,20 +59,21 @@ h1 {
 }
 
 .dropdown {
-  grid-column: 2 / span 1;
-  grid-row: 2 / span 1;
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
 }
 
 label {
   color: rgb(232, 250, 245);
   font-size: 1.9vmin;
+  padding-right: 1vmin;
 }
 
 #options {
   background-color: rgb(232, 250, 245);
   font-size: 1.5vmin;
   border-radius: 1vmin;
-  box-shadow: 0vmin 2vmin 2vmin 0vmin rgba(0, 0, 0, 0.4);
+  box-shadow: 0vmin 0.5vmin vmin 0vmin rgba(0, 0, 0, 0.4);
 }
 
 .play {
@@ -92,24 +91,37 @@ label {
 }
 
 #button {
-  grid-column: 2 / span 1;
-  grid-row: 3/ span 1;
+  grid-column: 3 / span 1;
+  grid-row: 2 / span 1;
 }
 
 #timer {
   height: 8vmin;
   font-size: 3vmin;
   color: rgb(232, 250, 245);
-  grid-column: 2 / span 1;
-  grid-row: 4 / span 1;
+  grid-column: 3 / span 1;
+  grid-row: 3 / span 1;
+}
+
+#reset {
+  background-color: rgb(232, 250, 245);
+  color: rgb(19, 85, 66);
+  border: none;
+  border-radius: 1vmin;
+  font-family: 'Pathway Extreme', sans-serif;
+  padding: 0.5vmin;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2vmin;
+  cursor: pointer;
 }
 
 #message {
   height: 8vmin;
   font-size: 4vmin;
   color: rgb(232, 250, 245);
-  grid-column: 2 / span 1;
-  grid-row: 5 / span 1;
+  grid-column: 3 / span 1;
+  grid-row: 4 / span 1;
 }
 
 #footer {

@@ -1,5 +1,5 @@
 // // Constants
-const CARDS_DEFAULT = [
+const CARDS = [
     { path: '../imgs/cards/clubs/clubs-A.svg', id: 'A' },
     { path: '../imgs/cards/clubs/clubs-K.svg', id: 'K' },
     { path: '../imgs/cards/clubs/clubs-Q.svg', id: 'Q' },
@@ -52,34 +52,6 @@ const CARDS_DEFAULT = [
     { path: '../imgs/cards/spades/spades-r04.svg', id: '4' },
     { path: '../imgs/cards/spades/spades-r03.svg', id: '3' },
     { path: '../imgs/cards/spades/spades-r02.svg', id: '2' }];
-// const EASY_CARDS = [
-//     { path: '../imgs/cards/clubs/clubs-A.svg', id: 'A' },
-//     { path: '../imgs/cards/clubs/clubs-K.svg', id: 'K' },
-//     { path: '../imgs/cards/clubs/clubs-Q.svg', id: 'Q' },
-//     { path: '../imgs/cards/clubs/clubs-J.svg', id: 'J' },
-//     { path: '../imgs/cards/clubs/clubs-r10.svg', id: '10' },
-//     { path: '../imgs/cards/clubs/clubs-r09.svg', id: '9' },
-//     { path: '../imgs/cards/clubs/clubs-r08.svg', id: '8' },
-//     { path: '../imgs/cards/clubs/clubs-r07.svg', id: '7' },
-//     { path: '../imgs/cards/clubs/clubs-r06.svg', id: '6' },
-//     { path: '../imgs/cards/clubs/clubs-r05.svg', id: '5' },
-//     { path: '../imgs/cards/clubs/clubs-r04.svg', id: '4' },
-//     { path: '../imgs/cards/clubs/clubs-r03.svg', id: '3' },
-//     { path: '../imgs/cards/clubs/clubs-r02.svg', id: '2' },
-//     { path: '../imgs/cards/diamonds/diamonds-A.svg', id: 'A' },
-//     { path: '../imgs/cards/diamonds/diamonds-K.svg', id: 'K' },
-//     { path: '../imgs/cards/diamonds/diamonds-Q.svg', id: 'Q' },
-//     { path: '../imgs/cards/diamonds/diamonds-J.svg', id: 'J' },
-//     { path: '../imgs/cards/diamonds/diamonds-r10.svg', id: '10' },
-//     { path: '../imgs/cards/diamonds/diamonds-r09.svg', id: '9' },
-//     { path: '../imgs/cards/diamonds/diamonds-r08.svg', id: '8' },
-//     { path: '../imgs/cards/diamonds/diamonds-r07.svg', id: '7' },
-//     { path: '../imgs/cards/diamonds/diamonds-r06.svg', id: '6' },
-//     { path: '../imgs/cards/diamonds/diamonds-r05.svg', id: '5' },
-//     { path: '../imgs/cards/diamonds/diamonds-r04.svg', id: '4' },
-//     { path: '../imgs/cards/diamonds/diamonds-r03.svg', id: '3' },
-//     { path: '../imgs/cards/diamonds/diamonds-r02.svg', id: '2' }
-// ]
 const CARD_BACK = '../imgs/cards/backs/red.svg';
 
 
@@ -90,13 +62,14 @@ let timer;
 let winningCondition;
 let timeRunOut;
 let numOfCards;
-let SHUFFLED_DEFAULT_CARDS;
+let shuffledCards;
 
 
 // Cached elements
 const boardEl = document.getElementById('board');
 const optionEl = document.getElementById('options');
 const btnEl = document.getElementById('button');
+const resetEl = document.getElementById('reset');
 const msgEl = document.getElementById('message');
 
 
@@ -104,6 +77,7 @@ const msgEl = document.getElementById('message');
 document.addEventListener('DOMContentLoaded', init);
 boardEl.addEventListener('click', handleMove);
 btnEl.addEventListener('click', handleBtnClick);
+resetEl.addEventListener('click', handleReset);
 optionEl.addEventListener('change', handleOptionChange);
 
 
@@ -114,19 +88,17 @@ function init() {
     timeRunOut = false;
     numOfCards = 52;
     winningCondition = numOfCards;
-    shuffleCards();
-    createBoard();
     render();
 }
 
 function shuffleCards () {
-    let cards = [...CARDS_DEFAULT];
+    let cards = [...CARDS];
     if (numOfCards === 26) {
         cards = cards.filter((cardObj, idx) => {
             return idx < numOfCards;
         })
     }
-    SHUFFLED_DEFAULT_CARDS = cards.sort(() => 0.5 - Math.random());
+    shuffledCards = cards.sort(() => 0.5 - Math.random());
 }
 
 function createBoard() {
@@ -140,7 +112,8 @@ function createBoard() {
 }
 
 function startTimer() {
-    countdown(5, 0);
+    let minutes = numOfCards === 26 ? 2 : 4;
+    countdown(minutes, 0);
 }
 
 function countdown(minutes, seconds) {
@@ -167,15 +140,17 @@ function countdown(minutes, seconds) {
 }
 
 function render() {
-
+    shuffleCards();
+    createBoard();
 }
 
 // Player interacts…
 function handleBtnClick(e) {
     let target = e.target;
-    if (!target.classList.contains('play')) {
+    if (!target.classList.contains('play') || target.disabled) {
         return;
     }
+    target.disabled = true;
     gameHasStarted = true;
     startTimer();
 }
@@ -184,8 +159,13 @@ function handleOptionChange(e) {
     numOfCards = parseInt(e.target.value);
     winningCondition = numOfCards;
     boardEl.innerHTML = '';
-    shuffleCards();
-    createBoard();
+    gameHasStarted = false;
+    clearTimeout(timer);
+    render();
+}
+
+function handleReset() {
+    location.reload();
 }
 
 function handleMove(e) {
@@ -200,8 +180,8 @@ function handleMove(e) {
     let target = e.target;
     let cardIndex = target.id;
     let selectedCard = document.getElementsByClassName('card');
-    selectedCard = SHUFFLED_DEFAULT_CARDS[cardIndex].path;
-    let selectedCardId = SHUFFLED_DEFAULT_CARDS[cardIndex].id;
+    selectedCard = shuffledCards[cardIndex].path;
+    let selectedCardId = shuffledCards[cardIndex].id;
 
     if (firstAndSecondChoice.length < 2) {
         if (target.classList.contains('active')) {
@@ -231,13 +211,14 @@ function handleMove(e) {
             checkForWin();
         }, 1000);
     }
-    render();
 }
+
 
 // Check the game status:
 function checkForWin() {
     console.log(winningCondition);
     if (winningCondition === 0 && !timeRunOut) {
-        msgEl.innerText = 'CONGRATULATIONS!!! You spotted all matching pairs!';
+        clearTimeout(timer);
+        msgEl.textContent = 'WELL DONE!!! You spotted all matching pairs!';
     }
 }
