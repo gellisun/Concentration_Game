@@ -1,5 +1,5 @@
 // // Constants
-const CARDS = [
+const CARDS_DEFAULT = [
     { path: '../imgs/cards/clubs/clubs-A.svg', id: 'A' },
     { path: '../imgs/cards/clubs/clubs-K.svg', id: 'K' },
     { path: '../imgs/cards/clubs/clubs-Q.svg', id: 'Q' },
@@ -52,8 +52,36 @@ const CARDS = [
     { path: '../imgs/cards/spades/spades-r04.svg', id: '4' },
     { path: '../imgs/cards/spades/spades-r03.svg', id: '3' },
     { path: '../imgs/cards/spades/spades-r02.svg', id: '2' }];
-const CARD_BACK = ['../imgs/cards/backs/red.svg', '../imgs/cards/backs/blue.svg'];
-const SHUFFLED_CARDS = CARDS.sort(() => 0.5 - Math.random());
+// const EASY_CARDS = [
+//     { path: '../imgs/cards/clubs/clubs-A.svg', id: 'A' },
+//     { path: '../imgs/cards/clubs/clubs-K.svg', id: 'K' },
+//     { path: '../imgs/cards/clubs/clubs-Q.svg', id: 'Q' },
+//     { path: '../imgs/cards/clubs/clubs-J.svg', id: 'J' },
+//     { path: '../imgs/cards/clubs/clubs-r10.svg', id: '10' },
+//     { path: '../imgs/cards/clubs/clubs-r09.svg', id: '9' },
+//     { path: '../imgs/cards/clubs/clubs-r08.svg', id: '8' },
+//     { path: '../imgs/cards/clubs/clubs-r07.svg', id: '7' },
+//     { path: '../imgs/cards/clubs/clubs-r06.svg', id: '6' },
+//     { path: '../imgs/cards/clubs/clubs-r05.svg', id: '5' },
+//     { path: '../imgs/cards/clubs/clubs-r04.svg', id: '4' },
+//     { path: '../imgs/cards/clubs/clubs-r03.svg', id: '3' },
+//     { path: '../imgs/cards/clubs/clubs-r02.svg', id: '2' },
+//     { path: '../imgs/cards/diamonds/diamonds-A.svg', id: 'A' },
+//     { path: '../imgs/cards/diamonds/diamonds-K.svg', id: 'K' },
+//     { path: '../imgs/cards/diamonds/diamonds-Q.svg', id: 'Q' },
+//     { path: '../imgs/cards/diamonds/diamonds-J.svg', id: 'J' },
+//     { path: '../imgs/cards/diamonds/diamonds-r10.svg', id: '10' },
+//     { path: '../imgs/cards/diamonds/diamonds-r09.svg', id: '9' },
+//     { path: '../imgs/cards/diamonds/diamonds-r08.svg', id: '8' },
+//     { path: '../imgs/cards/diamonds/diamonds-r07.svg', id: '7' },
+//     { path: '../imgs/cards/diamonds/diamonds-r06.svg', id: '6' },
+//     { path: '../imgs/cards/diamonds/diamonds-r05.svg', id: '5' },
+//     { path: '../imgs/cards/diamonds/diamonds-r04.svg', id: '4' },
+//     { path: '../imgs/cards/diamonds/diamonds-r03.svg', id: '3' },
+//     { path: '../imgs/cards/diamonds/diamonds-r02.svg', id: '2' }
+// ]
+const CARD_BACK = '../imgs/cards/backs/red.svg';
+
 
 // State of the game
 let gameHasStarted;
@@ -61,9 +89,13 @@ let firstAndSecondChoice;
 let timer;
 let winningCondition;
 let timeRunOut;
+let numOfCards;
+let SHUFFLED_DEFAULT_CARDS;
+
 
 // Cached elements
 const boardEl = document.getElementById('board');
+const optionEl = document.getElementById('options');
 const btnEl = document.getElementById('button');
 const msgEl = document.getElementById('message');
 
@@ -72,22 +104,35 @@ const msgEl = document.getElementById('message');
 document.addEventListener('DOMContentLoaded', init);
 boardEl.addEventListener('click', handleMove);
 btnEl.addEventListener('click', handleBtnClick);
+optionEl.addEventListener('change', handleOptionChange);
 
 
 // Functions:
 function init() {
     gameHasStarted = false;
     firstAndSecondChoice = [];
-    winningCondition = SHUFFLED_CARDS.length;
     timeRunOut = false;
-    createBoard(boardEl);
+    numOfCards = 52;
+    winningCondition = numOfCards;
+    shuffleCards();
+    createBoard();
     render();
 }
 
-function createBoard(boardEl) {
-    for (let i = 0; i < SHUFFLED_CARDS.length; i++) {
+function shuffleCards () {
+    let cards = [...CARDS_DEFAULT];
+    if (numOfCards === 26) {
+        cards = cards.filter((cardObj, idx) => {
+            return idx < numOfCards;
+        })
+    }
+    SHUFFLED_DEFAULT_CARDS = cards.sort(() => 0.5 - Math.random());
+}
+
+function createBoard() {
+    for (let i = 0; i < numOfCards; i++) {
         const card = document.createElement('img');
-        card.src = CARD_BACK[Math.floor(Math.random() * CARD_BACK.length)];
+        card.src = CARD_BACK;
         card.className = 'card';
         card.id = i;
         boardEl.appendChild(card);
@@ -95,7 +140,7 @@ function createBoard(boardEl) {
 }
 
 function startTimer() {
-    countdown(5, 0o0);
+    countdown(5, 0);
 }
 
 function countdown(minutes, seconds) {
@@ -135,6 +180,14 @@ function handleBtnClick(e) {
     startTimer();
 }
 
+function handleOptionChange(e) {
+    numOfCards = parseInt(e.target.value);
+    winningCondition = numOfCards;
+    boardEl.innerHTML = '';
+    shuffleCards();
+    createBoard();
+}
+
 function handleMove(e) {
     //guards
     if (!e.target.classList.contains('card')) {
@@ -147,16 +200,16 @@ function handleMove(e) {
     let target = e.target;
     let cardIndex = target.id;
     let selectedCard = document.getElementsByClassName('card');
-    selectedCard = SHUFFLED_CARDS[cardIndex].path;
-    let selectedCardId = SHUFFLED_CARDS[cardIndex].id;
+    selectedCard = SHUFFLED_DEFAULT_CARDS[cardIndex].path;
+    let selectedCardId = SHUFFLED_DEFAULT_CARDS[cardIndex].id;
 
     if (firstAndSecondChoice.length < 2) {
-        if(target.classList.contains('active')) {
+        if (target.classList.contains('active')) {
             return;
         }
         target.src = selectedCard;
         target.classList.add('active');
-        firstAndSecondChoice.push({card: target, id: selectedCardId});
+        firstAndSecondChoice.push({ card: target, id: selectedCardId });
     }
     if (firstAndSecondChoice.length === 2 && firstAndSecondChoice[0].id !== firstAndSecondChoice[1].id) {
         setTimeout(() => {
@@ -183,7 +236,7 @@ function handleMove(e) {
 
 // Check the game status:
 function checkForWin() {
-console.log(winningCondition);
+    console.log(winningCondition);
     if (winningCondition === 0 && !timeRunOut) {
         msgEl.innerText = 'CONGRATULATIONS!!! You spotted all matching pairs!';
     }

@@ -1,104 +1,120 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    height: 100vh;
-    font-family: 'Pathway Extreme', sans-serif;
-    background-color: rgb(19, 85, 66);
+  height: 100vh;
+  font-family: 'Pathway Extreme', sans-serif;
+  background-color: rgb(19, 85, 66);
 }
 
 main {
-    height: 100 vmin;
-    width: 200vmin;
-    display: grid;
-    justify-content: center;
-    justify-content: space-between;
-    grid-template-columns: 80vmin 80vmin;
-    grid-template-rows: 15vmin 20vmin 20vmin 20vmin 40vmin;
+  height: 100 vmin;
+  width: 200vmin;
+  display: grid;
+  justify-content: center;
+  justify-content: space-between;
+  grid-template-columns: 100vmin 100vmin;
+  grid-template-rows: 15vmin 10vmin 20vmin 20vmin 40vmin;
 }
 
-/* ul {
-    color: rgb(232, 250, 245);
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    height: 5vmin;
+ul {
+  color: rgb(232, 250, 245);
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  height: 5vmin;
 }
 
 li {
-    margin-right: 2vmin;
-    font-size: 2vmin;
+  margin-right: 2vmin;
+  font-size: 2vmin;
 }
-*/
+
 
 a {
-    color: rgb(232, 250, 245);
-    text-decoration: none;
+  color: rgb(232, 250, 245);
+  text-decoration: none;
 }
 
 h1 {
-    font-size: 7vmin;
-    color: rgb(232, 250, 245);
-    text-align: center;
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 1;
+  font-size: 7vmin;
+  color: rgb(232, 250, 245);
+  text-align: center;
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 1;
 }
 
 #board {
-   min-width: 100vmin;
-   grid-column: 1 / span 1;
-   grid-row: 2 / span 3; 
-   display: flex; 
-   flex-wrap: wrap; 
-   gap: px;
-   justify-content: center;
+  min-width: 100vmin;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
-    width: 9vmin;
-    height: 13vmin;
+  width: 9vmin;
+  height: 13vmin;
 }
 
-button {
-    background-color: rgb(232, 250, 245);
-    color: rgb(19, 85, 66);
-    border: none;
-    border-radius: 5vmin;
-    font-family: 'Pathway Extreme', sans-serif;
-    margin-top: 8vmin;
-    padding: 2vmin;
-    text-align: center;
-    text-decoration: none;
-    font-size: 5vmin;
-    cursor: pointer;
+.dropdown {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+}
+
+label {
+  color: rgb(232, 250, 245);
+  font-size: 1.9vmin;
+}
+
+#options {
+  background-color: rgb(232, 250, 245);
+  font-size: 1.5vmin;
+  border-radius: 1vmin;
+  box-shadow: 0vmin 2vmin 2vmin 0vmin rgba(0, 0, 0, 0.4);
+}
+
+.play {
+  background-color: rgb(232, 250, 245);
+  color: rgb(19, 85, 66);
+  border: none;
+  border-radius: 5vmin;
+  font-family: 'Pathway Extreme', sans-serif;
+  margin-top: 8vmin;
+  padding: 2vmin;
+  text-align: center;
+  text-decoration: none;
+  font-size: 5vmin;
+  cursor: pointer;
 }
 
 #button {
-    grid-column: 2 / span 1;
-    grid-row: 2/ span 3;
+  grid-column: 2 / span 1;
+  grid-row: 3/ span 1;
 }
 
 #timer {
-    height: 8vmin;
-    font-size: 3vmin;
-    color: rgb(232, 250, 245);
-    grid-column: 2 / span 1;
-    grid-row: 3 / span 2;
+  height: 8vmin;
+  font-size: 3vmin;
+  color: rgb(232, 250, 245);
+  grid-column: 2 / span 1;
+  grid-row: 4 / span 1;
 }
 
 #message {
-    height: 8vmin;
-    font-size: 4vmin;
-    color: rgb(232, 250, 245);
-    grid-column: 2 / span 1;
-    grid-row: 4 / span 1;
+  height: 8vmin;
+  font-size: 4vmin;
+  color: rgb(232, 250, 245);
+  grid-column: 2 / span 1;
+  grid-row: 5 / span 1;
 }
 
 #footer {
-    color: rgb(232, 250, 245);
-    padding: 3vmin;
-    display: flex;
-    justify-content: flex-end;
+  color: rgb(232, 250, 245);
+  padding: 3vmin;
+  display: flex;
+  justify-content: flex-end;
 }
