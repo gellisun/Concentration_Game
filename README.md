@@ -1,9 +1,10 @@
 
 # Project 1: Concentration Game
 
-The game has a total of 20 cards laid face down and up to two cards can be flipped face up each try. The object of the game is to turn over pairs of matching cards.
-The rules: at each turn the player chooses two cards and turns them face up. If they are the same then that pair is removed from the board. If they are not the same, they are turned face down again and the player tries again.
-There is a time limit of 2 minutes to find all 10 pairs.
+The board has a default of 52 cards as in the original game - the user can decide to either play with 52 or 26 cards.
+Once the user clicks on the start button, for each try two cards can be flipped.
+The object of the game is to find pairs of matching cards.
+The rules: only two cards at the time can be flipped and all the pairs must be found within the time limit.
 The game ends when the last pair has been picked up or when the time ends.
 
 ## History Of The Game
@@ -18,6 +19,8 @@ In turn, each player chooses two cards and turns them face up. If they are of th
 
 The game ends when the last pair has been picked up. The winner is the person with the most pairs. There may be a tie for first place.
 
+
+![alt text](/imgs/README%20imgs/concentration_game.png)
 
 # Technologies Used
 
@@ -35,3 +38,6 @@ Tools:
 
 
 # Next Steps
+- Add AI and let the user play against the computer.
+- Add a feature that keeps track of the moves.
+- Add a feature that gives points to the user based on how fast the pairs are found and how many moves to find them.

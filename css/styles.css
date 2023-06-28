@@ -15,7 +15,7 @@ main {
   justify-content: center;
   justify-content: space-between;
   grid-template-columns: 10vmin 100vmin 100vmin 10vmin;
-  grid-template-rows: 15vmin 20vmin 20vmin 20vmin 40vmin;
+  grid-template-rows: 15vmin 20vmin 20vmin 10vmin 5vmin;
 }
 
 /* ul {
@@ -41,7 +41,7 @@ a {
 h1 {
   font-size: 7vmin;
   color: rgb(232, 250, 245);
-  text-align: center;
+  margin-left: 23vmin;
 }
 
 #board {

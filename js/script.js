@@ -198,7 +198,9 @@ function handleMove(e) {
                 choice.card.classList.remove('active');
             }
             firstAndSecondChoice = [];
+            msgEl.textContent = "Wrong guess, try again!";
         }, 1000);
+            msgEl.textContent = '';
     }
     if (firstAndSecondChoice.length >= 2 && firstAndSecondChoice[0].id === firstAndSecondChoice[1].id) {
         setTimeout(() => {
@@ -207,6 +209,7 @@ function handleMove(e) {
                 choice.card.classList.remove('active');
             }
             firstAndSecondChoice = [];
+            msgEl.textContent = "Yes! Keep guessing!";
             winningCondition -= 2;
             checkForWin();
         }, 1000);
