@@ -3,7 +3,7 @@
 
 ## Description
 
-This is my first solo project on the General Assembly Software Engineering Immersive. After two weeks of learning HTML, CSS and JavaScript I was assigned my first project: to render a game in the browser utilising ‘vanilla’ JavaScript, HTML and CSS, with a list of games to choose from such as Spaceman, Simon, Mastermind, Minesweeper, etcetera...
+This is my first solo project on the General Assembly Software Engineering Immersive. After two weeks of learning HTML, CSS and JavaScript I was assigned my first project: to render a game in the browser utilising vanilla JavaScript, HTML and CSS, with a list of games to choose from such as Spaceman, Simon, Mastermind, Minesweeper, etcetera...
 
 ## The Game
 
@@ -25,7 +25,7 @@ In turn, each player chooses two cards and turns them face up. If they are of th
 
 The game ends when the last pair has been picked up. The winner is the person with the most pairs. There may be a tie for first place.
 
-![alt text](/imgs/README%20imgs/marvel_themed.png)
+![alt text](/imgs/README%20imgs/game.png)
 
 [Start playing!](https://gellisun.github.io/Concentration_Game/)
 
@@ -67,58 +67,56 @@ I started by researcing the history of the game and the games online to confirm 
 ### Pseudocode
 
 1. Constants
-- An array of images
-- A constant for randomly selecting images
+    - An array of images
+    - A constant for randomly selecting images
 
 2. State of the game
-- let gameHasStarted;
-- let cardsFlipped;
-- let timer;
+    - let gameHasStarted;
+    - let cardsFlipped;
+    - let timer;
 
 3. Cached elements
-- Cards containing element
-- Cards
-- Timer
-- Button
-- Win message element
+    - Cards containing element
+    - Cards
+    - Timer
+    - Button
+    - Win message element
 
 4. Event Listeners
-- Click on the card(s)
-- Click on the start button
-- Click on the reset button
+    - Click on the card(s)
+    - Click on the start button
+    - Click on the reset button
 
 5. Page Load
-- Board with array of cards
-- Winner: either won or game on 
-- Generate the cards and display them
-- Append them to the containing element in a random position
+    - Board with array of cards
+    - Winner: either won or game on 
+    - Generate the cards and display them
+    - Append them to the containing element in a random position
 
 6. Functions:
-init();
-- Set if the game has started with flipping action or start button
-- Number of cards flipped (only two can be flipped at a time) to 0
-- Timer or Moves to 0
+    init();
+    - Set if the game has started with flipping action or start button
+    - Number of cards flipped (only two can be flipped at a time) to 0
+    - Timer or Moves to 0
 
-Player interacts…
-
-Click function:
-- Player can click up to two cards
-- Add class of active to each card clicked
-- Stop ability of the player to click on any other card
-- If the cards have different values
-- show the color or image of the clicked cards for two seconds and then hide them
-- Remove the active class
-- Allow the ability of the player to click on the same cards again, and the other cards in the board
-- If the cards values match both cards disappear
+    Click function:
+    - Player can click up to two cards
+    - Add class of active to each card clicked
+    - Stop ability of the player to click on any other card
+    - If the cards have different values
+    - show the color or image of the clicked cards for two seconds and then hide them
+    - Remove the active class
+    - Allow the ability of the player to click on the same cards again, and the other cards in the board
+    - If the cards values match both cards disappear
 
 7. Check the game status:
 
-- While the timer is not 0 and the are still pairs of cards to match, keep letting the player click on boxes
-- Else, well done, the game is finished!
+    - While the timer is not 0 and the are still pairs of cards to match, keep letting the player click on boxes
+    - Else, well done, the game is finished!
 
 8. Restart
 
-- By clicking on play button the board of cards resets, the timer resets
+    - By clicking on play button the board of cards resets, the timer resets
 
 ## Getting Started
 
@@ -127,60 +125,60 @@ Click function:
 I started with a few functions and the aim to dinamically create and display the cards and shuffle them.
 I created an array of objects for the CARDS array that is displayed when the cards are flipped by the user: each object has a path and id keys with their values. I also created an array CARD_BACK to show the back of the cards when they are facing down on the board.
 
-`function shuffleCards () {
-    let cards = [...CARDS];
-    if (numOfCards === 26) {
-        cards = cards.filter((cardObj, idx) => {
-            return idx < numOfCards;
-        })
+`   function shuffleCards () {
+        let cards = [...CARDS];
+        if (numOfCards === 26) {
+            cards = cards.filter((cardObj, idx) => {
+                return idx < numOfCards;
+            })
+        }
+        shuffledCards = cards.sort(() => 0.5 - Math.random());
     }
-    shuffledCards = cards.sort(() => 0.5 - Math.random());
-}
 
-function createBoard() {
-    for (let i = 0; i < numOfCards; i++) {
-        const card = document.createElement('img');
-        card.src = CARD_BACK;
-        card.className = 'card';
-        card.id = i;
-        boardEl.appendChild(card);
+    function createBoard() {
+        for (let i = 0; i < numOfCards; i++) {
+            const card = document.createElement('img');
+            card.src = CARD_BACK;
+            card.className = 'card';
+            card.id = i;
+            boardEl.appendChild(card);
+        }
     }
-}
 
-function render() {
-    shuffleCards();
-    createBoard();
-}`
+    function render() {
+        shuffleCards();
+        createBoard();
+    }`
 
 ### The User Interactions
 
 I created four ways in which the user interacts with the page: by clicking on the 'Click to start!' and if so, by being able to click on two cards at the time in order to display them, and, in case of a change of heart or wanting to start again, by clicking on a 'Reset' button. Finally, once the MVP was finalised I added the possibility for the user to decide whether to go for a board of 26 cards rather than the default of 52.
 
-`function handleBtnClick(e) {
-    let target = e.target;
-    if (!target.classList.contains('play') || target.disabled) {
-        return;
+`   function handleBtnClick(e) {
+        let target = e.target;
+        if (!target.classList.contains('play') || target.disabled) {
+            return;
+        }
+        target.disabled = true;
+        gameHasStarted = true;
+        startTimer();
     }
-    target.disabled = true;
-    gameHasStarted = true;
-    startTimer();
-}
 
-function handleOptionChange(e) {
-    numOfCards = parseInt(e.target.value);
-    winningCondition = numOfCards;
-    timerEl.innerHTML = '0:00';
-    btnPlayEl.disabled = false;
-    boardEl.innerHTML = '';
-    gameHasStarted = false;
-    clearTimeout(timer);
-    render();
-}
+    function handleOptionChange(e) {
+        numOfCards = parseInt(e.target.value);
+        winningCondition = numOfCards;
+        timerEl.innerHTML = '0:00';
+        btnPlayEl.disabled = false;
+        boardEl.innerHTML = '';
+        gameHasStarted = false;
+        clearTimeout(timer);
+        render();
+    }
 
-function handleReset() {
-    clearTimeout(timer);
-    init();
-}`
+    function handleReset() {
+        clearTimeout(timer);
+        init();
+    }`
 
 It was the handleMove function where I was the most challenged.
 The function has guards that won't allow the user to click on the cards unless clicking on the 'Click to start!' button, also it will only listen for clicks that happen on the actual cards and not areas next to them. Finally, the user won't be able to click on the same card twice (this was one of the many bugs I fixed).
@@ -195,53 +193,53 @@ The two main conditions of the function will check if the newly created array of
  - clears the selections array and displays a 'well done' message
  - takes action on the winning condition and calls the function that will check if the user wins
 
-`function handleMove(e) {
-    //guards
-    if (!e.target.classList.contains('card')) {
-        return;
-    };
-    if (!gameHasStarted) {
-        return;
-    };
-    //game has started
-    let target = e.target;
-    let cardIndex = target.id;
-    let selectedCard = document.getElementsByClassName('card');
-    selectedCard = shuffledCards[cardIndex].path;
-    let selectedCardId = shuffledCards[cardIndex].id;
-
-    if (firstAndSecondChoice.length < 2) {
-        if (target.classList.contains('active')) {
+`   function handleMove(e) {
+        //guards
+        if (!e.target.classList.contains('card')) {
             return;
+        };
+        if (!gameHasStarted) {
+            return;
+        };
+        //game has started
+        let target = e.target;
+        let cardIndex = target.id;
+        let selectedCard = document.getElementsByClassName('card');
+        selectedCard = shuffledCards[cardIndex].path;
+        let selectedCardId = shuffledCards[cardIndex].id;
+
+        if (firstAndSecondChoice.length < 2) {
+            if (target.classList.contains('active')) {
+                return;
+            }
+            target.src = selectedCard;
+            target.classList.add('active');
+            firstAndSecondChoice.push({ card: target, id: selectedCardId });
         }
-        target.src = selectedCard;
-        target.classList.add('active');
-        firstAndSecondChoice.push({ card: target, id: selectedCardId });
-    }
-    if (firstAndSecondChoice.length === 2 && firstAndSecondChoice[0].id !== firstAndSecondChoice[1].id) {
-        setTimeout(() => {
-            for (let choice of firstAndSecondChoice) {
-                choice.card.src = CARD_BACK;
-                choice.card.classList.remove('active');
-            }
-            firstAndSecondChoice = [];
-            msgEl.textContent = "Wrong guess, try again!";
-        }, 1000);
-            msgEl.textContent = '';
-    }
-    if (firstAndSecondChoice.length >= 2 && firstAndSecondChoice[0].id === firstAndSecondChoice[1].id) {
-        setTimeout(() => {
-            for (let choice of firstAndSecondChoice) {
-                choice.card.style.visibility = 'hidden';
-                choice.card.classList.remove('active');
-            }
-            firstAndSecondChoice = [];
-            msgEl.textContent = "Yes! Keep guessing!";
-            winningCondition -= 2;
-            checkForWin();
-        }, 1000);
-    }
-}`
+        if (firstAndSecondChoice.length === 2 && firstAndSecondChoice[0].id !== firstAndSecondChoice[1].id) {
+            setTimeout(() => {
+                for (let choice of firstAndSecondChoice) {
+                    choice.card.src = CARD_BACK;
+                    choice.card.classList.remove('active');
+                }
+                firstAndSecondChoice = [];
+                msgEl.textContent = "Wrong guess, try again!";
+            }, 1000);
+                msgEl.textContent = '';
+        }
+        if (firstAndSecondChoice.length >= 2 && firstAndSecondChoice[0].id === firstAndSecondChoice[1].id) {
+            setTimeout(() => {
+                for (let choice of firstAndSecondChoice) {
+                    choice.card.style.visibility = 'hidden';
+                    choice.card.classList.remove('active');
+                }
+                firstAndSecondChoice = [];
+                msgEl.textContent = "Yes! Keep guessing!";
+                winningCondition -= 2;
+                checkForWin();
+            }, 1000);
+        }
+    }`
 
 ## Key Takeaways
 
