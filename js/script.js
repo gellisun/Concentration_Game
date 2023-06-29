@@ -52,7 +52,7 @@ const CARDS = [
     { path: '../imgs/cards/spades/spades-r04.svg', id: '4' },
     { path: '../imgs/cards/spades/spades-r03.svg', id: '3' },
     { path: '../imgs/cards/spades/spades-r02.svg', id: '2' }];
-const CARD_BACK = '../imgs/cards/backs/File-01.svg';
+const CARD_BACK = './../imgs/cards/backs/File-01.svg';
 
 
 // State of the game
