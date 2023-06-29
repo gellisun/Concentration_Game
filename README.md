@@ -125,7 +125,8 @@ I started by researcing the history of the game and the games online to confirm 
 I started with a few functions and the aim to dinamically create and display the cards and shuffle them.
 I created an array of objects for the CARDS array that is displayed when the cards are flipped by the user: each object has a path and id keys with their values. I also created an array CARD_BACK to show the back of the cards when they are facing down on the board.
 
-    `function shuffleCards () {
+```JavaScript
+    function shuffleCards () {
         let cards = [...CARDS];
         if (numOfCards === 26) {
             cards = cards.filter((cardObj, idx) => {
@@ -148,13 +149,15 @@ I created an array of objects for the CARDS array that is displayed when the car
     function render() {
         shuffleCards();
         createBoard();
-    }`
-
+    }
+```
+    
 ### The User Interactions
 
 I created four ways in which the user interacts with the page: by clicking on the 'Click to start!' and if so, by being able to click on two cards at the time in order to display them, and, in case of a change of heart or wanting to start again, by clicking on a 'Reset' button. Finally, once the MVP was finalised I added the possibility for the user to decide whether to go for a board of 26 cards rather than the default of 52.
 
-    `function handleBtnClick(e) {
+```JavaScript
+    function handleBtnClick(e) {
         let target = e.target;
         if (!target.classList.contains('play') || target.disabled) {
             return;
@@ -178,7 +181,8 @@ I created four ways in which the user interacts with the page: by clicking on th
     function handleReset() {
         clearTimeout(timer);
         init();
-    }`
+    }
+```
 
 It was the handleMove function where I was the most challenged.
 The function has guards that won't allow the user to click on the cards unless clicking on the 'Click to start!' button, also it will only listen for clicks that happen on the actual cards and not areas next to them. Finally, the user won't be able to click on the same card twice (this was one of the many bugs I fixed).
@@ -193,15 +197,14 @@ The two main conditions of the function will check if the newly created array of
  - clears the selections array and displays a 'well done' message
  - takes action on the winning condition and calls the function that will check if the user wins
 
-    `function handleMove(e) {
-        //guards
+```JavaScript
+    function handleMove(e) {
         if (!e.target.classList.contains('card')) {
             return;
         };
         if (!gameHasStarted) {
             return;
         };
-        //game has started
         let target = e.target;
         let cardIndex = target.id;
         let selectedCard = document.getElementsByClassName('card');
@@ -239,8 +242,8 @@ The two main conditions of the function will check if the newly created array of
                 checkForWin();
             }, 1000);
         }
-    }`
-
+    }
+```
 ## Key Takeaways
 
 This project thought me that I have to be patient with the learning process. If you asked me on the first two days if I was ever going to deliver something you would have had a negative feedback!
