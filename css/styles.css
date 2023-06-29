@@ -8,6 +8,7 @@ body {
   background-image: url('../imgs/background/avengers-background.jpg');
   background-color: rgb(53, 19, 85);;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 main {

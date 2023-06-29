@@ -69,8 +69,10 @@ let shuffledCards;
 const boardEl = document.getElementById('board');
 const optionEl = document.getElementById('options');
 const btnEl = document.getElementById('button');
+const btnPlayEl = btnEl.querySelector('.play');
 const resetEl = document.getElementById('reset');
 const msgEl = document.getElementById('message');
+const timerEl = document.getElementById('clock');
 
 
 // Event Listeners
@@ -88,6 +90,10 @@ function init() {
     timeRunOut = false;
     numOfCards = 52;
     winningCondition = numOfCards;
+    timerEl.innerHTML = '0:00';
+    btnPlayEl.disabled = false;
+    msgEl.textContent = '';
+    boardEl.innerHTML = '';
     render();
 }
 
@@ -111,6 +117,11 @@ function createBoard() {
     }
 }
 
+function render() {
+    shuffleCards();
+    createBoard();
+}
+
 function startTimer() {
     let minutes = numOfCards === 26 ? 2 : 4;
     countdown(minutes, 0);
@@ -118,7 +129,7 @@ function startTimer() {
 
 function countdown(minutes, seconds) {
     function tick() {
-        let counter = document.getElementById("clock");
+        let counter = timerEl;
         counter.innerHTML =
             minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
         seconds--;
@@ -139,11 +150,6 @@ function countdown(minutes, seconds) {
     tick();
 }
 
-function render() {
-    shuffleCards();
-    createBoard();
-}
-
 // Player interacts…
 function handleBtnClick(e) {
     let target = e.target;
@@ -158,6 +164,8 @@ function handleBtnClick(e) {
 function handleOptionChange(e) {
     numOfCards = parseInt(e.target.value);
     winningCondition = numOfCards;
+    timerEl.innerHTML = '0:00';
+    btnPlayEl.disabled = false;
     boardEl.innerHTML = '';
     gameHasStarted = false;
     clearTimeout(timer);
@@ -166,10 +174,7 @@ function handleOptionChange(e) {
 
 function handleReset() {
     clearTimeout(timer);
-    timer = 0;
-    document.getElementById('clock').innerHTML = '0:00';
-    msgEl.textContent = '';
-    render();
+    init();
 }
 
 function handleMove(e) {
@@ -223,7 +228,6 @@ function handleMove(e) {
 
 // Check the game status:
 function checkForWin() {
-    console.log(winningCondition);
     if (winningCondition === 0 && !timeRunOut) {
         clearTimeout(timer);
         msgEl.textContent = 'WELL DONE!!! You spotted all matching pairs!';
