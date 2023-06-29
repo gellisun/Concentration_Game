@@ -5,7 +5,7 @@
 body {
   height: 100vh;
   font-family: 'Pathway Extreme', sans-serif;
-  background-image: url('/imgs/background/avengers-background.jpg');
+  background-image: url('../imgs/background/avengers-background.jpg');
   background-color: rgb(53, 19, 85);;
   background-size: cover;
 }

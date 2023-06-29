@@ -59,7 +59,7 @@ Specific to Concentration Game:
 
 I started by researcing the history of the game and the games online to confirm the features that I imagined I would want to implement such as different boards of cards, a countdown, AI...
 
-![alt text](/imgs/README%20imgs/wireframe.png)
+![alt text](/imgs/README%20imgs/wireframe.png)[^1]
 [^1]: MVP was only the h1, board, play button, timer and the 'wrong guess' message.
 
 ### Pseudocode
