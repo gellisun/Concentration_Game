@@ -131,7 +131,7 @@ function countdown(minutes, seconds) {
                 }, 1000);
             } else {
                 timeRunOut = true;
-                msgEl.innerText = 'TRY AGAIN!'
+                msgEl.innerText = 'TRY AGAIN!';
                 boardEl.removeEventListener('click', handleMove);
             }
         }
@@ -165,7 +165,11 @@ function handleOptionChange(e) {
 }
 
 function handleReset() {
-    location.reload();
+    clearTimeout(timer);
+    timer = 0;
+    document.getElementById('clock').innerHTML = '0:00';
+    msgEl.textContent = '';
+    render();
 }
 
 function handleMove(e) {
