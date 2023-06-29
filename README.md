@@ -125,7 +125,7 @@ I started by researcing the history of the game and the games online to confirm 
 I started with a few functions and the aim to dinamically create and display the cards and shuffle them.
 I created an array of objects for the CARDS array that is displayed when the cards are flipped by the user: each object has a path and id keys with their values. I also created an array CARD_BACK to show the back of the cards when they are facing down on the board.
 
-`   function shuffleCards () {
+    `function shuffleCards () {
         let cards = [...CARDS];
         if (numOfCards === 26) {
             cards = cards.filter((cardObj, idx) => {
@@ -154,7 +154,7 @@ I created an array of objects for the CARDS array that is displayed when the car
 
 I created four ways in which the user interacts with the page: by clicking on the 'Click to start!' and if so, by being able to click on two cards at the time in order to display them, and, in case of a change of heart or wanting to start again, by clicking on a 'Reset' button. Finally, once the MVP was finalised I added the possibility for the user to decide whether to go for a board of 26 cards rather than the default of 52.
 
-`   function handleBtnClick(e) {
+    `function handleBtnClick(e) {
         let target = e.target;
         if (!target.classList.contains('play') || target.disabled) {
             return;
@@ -193,7 +193,7 @@ The two main conditions of the function will check if the newly created array of
  - clears the selections array and displays a 'well done' message
  - takes action on the winning condition and calls the function that will check if the user wins
 
-`   function handleMove(e) {
+    `function handleMove(e) {
         //guards
         if (!e.target.classList.contains('card')) {
             return;
