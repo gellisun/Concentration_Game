@@ -59,7 +59,7 @@ Specific to Concentration Game:
 
 ## Planning
 
-I started by researcing the history of the game and the games online to confirm the features that I imagined I would want to implement such as different boards of cards, a countdown, AI...
+I started by researching the history of the game and the games online to confirm the features that I imagined I would want to implement such as different boards of cards, a countdown, AI...
 
 ![alt text](/imgs/README%20imgs/wireframe.png)[^1]
 [^1]: The photo shows some of the features I thought of during planning. MVP were only the game title, board, play button, timer and the 'wrong guess' message.
@@ -122,7 +122,7 @@ I started by researcing the history of the game and the games online to confirm 
 
 ### The Page Setup
 
-I started with a few functions and the aim to dinamically create and display the cards and shuffle them.
+I started with a few functions and the aim to dynamically create and display the cards and shuffle them.
 I created an array of objects for the CARDS array that is displayed when the cards are flipped by the user: each object has a path and id keys with their values. I also created an array CARD_BACK to show the back of the cards when they are facing down on the board.
 
 ```JavaScript
@@ -246,9 +246,9 @@ The two main conditions of the function will check if the newly created array of
 ```
 ## Key Takeaways
 
-This project thought me that I have to be patient with the learning process. If you asked me on the first two days if I was ever going to deliver something you would have had a negative feedback!
-I found that starting from scratch takes a lot of thinking, planning ahead and having the ideas clear before starting to put everything together, without the wireframe and pseudocode I created as first step it would have been much harder for me.
-I did my best to get to the point where I could add more than only one feature to my MVP, but as expected on a first project I spent a lot of time figuring out why some of the code I was writing would work differently from the way I wanted or working on refactoring and make it DRY.
+This project taught me that I have to be patient with the learning process. If you asked me on the first two days if I was ever going to deliver something you would have had negative feedback!
+I found that starting from scratch takes a lot of thinking, planning ahead and having the ideas clear before starting to put everything together. Without the wireframe and pseudocode I created as the first step it would have been much harder for me.
+I did my best to get to the point where I could add more than only one feature to my MVP, but as expected on a first project I spent a lot of time figuring out why some of the code I was writing would work differently from the way I wanted or working on refactoring it and make it DRY.
 Overall I am satisfied that I have a functioning game and I am really proud of overcoming all the challenges that I was put face to face with.
 
 ## Next Steps
