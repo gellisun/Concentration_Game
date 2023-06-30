@@ -122,7 +122,7 @@ I started by researching the history of the game and the games online to confirm
 ### The Page Setup
 
 I started with a few functions and the aim to dynamically create and display the cards and shuffle them.
-I created an array of objects for the CARDS array that is displayed when the cards are flipped by the user: each object has a path and id keys with their values. I also created an array CARD_BACK to show the back of the cards when they are facing down on the board.
+I created an array of objects storing the CARDS images when flipped: each object has a path and id keys with their values. I also created an array CARD_BACK to show the back of the cards when they are facing down on the board.
 
 ```JavaScript
     function shuffleCards () {
