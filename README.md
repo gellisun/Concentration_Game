@@ -100,12 +100,12 @@ I started by researching the history of the game and the games online to confirm
 
     Click function:
     - Player can click up to two cards
-    - Add class of active to each card clicked
     - Stop ability of the player to click on any other card
-    - If the cards have different values
-    - show the color or image of the clicked cards for two seconds and then hide them
-    - Remove the active class
-    - Allow the ability of the player to click on the same cards again, and the other cards in the board
+    - Add class of active to each card clicked
+    - If the cards have different values:
+        - show the color or image of the clicked cards for two seconds and then hide them
+        - Remove the active class
+        - Allow the ability of the player to click on the same cards again, and the other cards in the board
     - If the cards values match both cards disappear
 
 7. Check the game status:
