@@ -67,8 +67,8 @@ I started by researching the history of the game and the games online to confirm
 ### Pseudocode
 
 1. Constants
-    - An array of images
-    - A constant for randomly selecting images
+    - An array of cards
+    - A constant for randomly selecting cards
 
 2. State of the game
     - let gameHasStarted;
@@ -85,7 +85,6 @@ I started by researching the history of the game and the games online to confirm
 4. Event Listeners
     - Click on the card(s)
     - Click on the start button
-    - Click on the reset button
 
 5. Page Load
     - Board with array of cards
@@ -97,7 +96,7 @@ I started by researching the history of the game and the games online to confirm
     init();
     - Set if the game has started with flipping action or start button
     - Number of cards flipped (only two can be flipped at a time) to 0
-    - Timer or Moves to 0
+    - Timer to 0
 
     Click function:
     - Player can click up to two cards
