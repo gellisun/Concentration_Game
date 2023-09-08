@@ -3,7 +3,7 @@
 
 ## Description
 
-This is my first solo project on the General Assembly Software Engineering Immersive. After two weeks of learning HTML, CSS and JavaScript I was assigned my first project: to render a game in the browser utilising vanilla JavaScript, HTML and CSS, with a list of games to choose from such as Spaceman, Simon, Mastermind, Minesweeper, etcetera...
+This is my first solo project on the General Assembly Software Engineering Immersive. After two weeks of learning HTML, CSS and JavaScript I was assigned my first project: I had seven days to render a game in the browser utilising vanilla JavaScript, HTML and CSS, with a list of games to choose from such as Spaceman, Simon, Mastermind, Minesweeper, etcetera...
 
 ## The Game
 
@@ -243,12 +243,14 @@ The two main conditions of the function will check if the newly created array of
         }
     }
 ```
+
+## Challenges
+I found that starting from scratch takes a lot of thinking, planning ahead and having the ideas clear before starting to put everything together. 
+The biggest challenge for me was to start from scratch and figuring out the correct flow that the code should have had.
+
 ## Key Takeaways
 
-This project taught me that I have to be patient with the learning process. If you asked me on the first two days if I was ever going to deliver something you would have had negative feedback!
-I found that starting from scratch takes a lot of thinking, planning ahead and having the ideas clear before starting to put everything together. Without the wireframe and pseudocode I created as the first step it would have been much harder for me.
-I did my best to get to the point where I could add more than only one feature to my MVP, but as expected on a first project I spent a lot of time figuring out why some of the code I was writing would work differently from the way I wanted or working on refactoring it and make it DRY.
-Overall I am satisfied that I have a functioning game and I am really proud of overcoming all the challenges that I was put face to face with.
+This project taught me that I have to be patient with the learning process. If you asked me on the first two days if I was ever going to deliver something you would have had negative feedback! Without the wireframe and pseudocode I created as the first step it would have been much harder for me. I did my best to get to the point where I could add more than only one feature to my MVP, but as expected on a first project I spent a lot of time figuring out why some of the code I was writing would work differently from the way I wanted or working on refactoring it and make it DRY. Overall I am satisfied that I have a functioning game and I am really proud of overcoming all the challenges that I was put face to face with.
 
 ## Next Steps
 - Responsive design
